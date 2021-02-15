@@ -1,0 +1,9 @@
+Flask==1.1.2
+requests==2.24.0
+SQLAlchemy==1.3.20
+numpy==1.19.2
+matplotlib==3.3.2
+Beautifulsoup4==4.9.3
+wtforms~=2.3.3
+jinja2~=2.11.2
+alembic~=1.5.3

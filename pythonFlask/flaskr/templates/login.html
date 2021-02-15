@@ -1,22 +1,24 @@
 {% from "_formhelpers.html" import render_field %}
 {% extends "base.html" %}
 {% block title %}
-ログイン - {{ super() }}
+Login - {{ super() }}
 {% endblock %}
 {% block content %}
 {% for message in get_flashed_messages() %}
 {{ message }}
 {% endfor %}
-<div class="row">
-    <form method="POST">
+<div class="form-row">
+    <form class="btn-lg btn-block text-center mt-4" method="POST">
         {{ form.csrf_token }}
         {{ render_field(form.email) }}
         {{ render_field(form.password) }}
         {{ render_field(form.confirm_password) }}
         {{ form.submit() }}
     </form>
-    <a href="{{url_for('app.forgot_password')}}">
-        パスワードを忘れた場合
-    </a>
+    <div class="pass mt-4">
+        <a href="{{url_for('app.forgot_password')}}">
+            If you forget your password..
+        </a>
+    </div>
 </div>
 {% endblock %}

@@ -1,3 +1,35 @@
+body {
+	/* Specifying an image file */
+	background-image: url("../icon/white_back.jpg");
+
+	/* Images are always placed in the center of the top, bottom, left, and right */
+	background-position: center center;
+
+	/* Don't repeat images in tiles */
+	background-repeat: no-repeat;
+
+	/* Fixed so that it does not move when the height of the content is larger than the height of the image */
+	background-attachment: fixed;
+
+	/* Fixed the height doesn't move, when the height of the content is larger than the height of the image */
+	background-size: cover;
+
+	/* Background color displayed before the background image is loaded */
+	background-color: #FFFFFF;
+
+	background-size: 100% 100%;
+
+	margin-bottom: 50px;
+}
+
+img {
+border: 1px #777777 solid !important;
+}
+
+.table-bordered {
+	border: 1px #777777 solid !important;
+}
+
 .user-image-big{
     width: 250px;
     height: 250px;
@@ -53,4 +85,57 @@
 	border-right: 0;
 	margin-top: -12px;
 	margin-right: -12px;
+}
+
+.message {
+	line-height: 0.5;
+	text-align: end;
+	margin-top: 2rem;
+}
+
+.friend-message {
+	line-height: 0.5;
+	text-align: left;
+	margin-top: 3rem;
+}
+
+.navbar{
+	/*background-color: #F5FFFA !important;*/
+	background-color: #333 !important;
+}
+
+.navbar-brand {
+    color: #fff !important;
+	margin-left: 70px;
+}
+
+.pass{
+	text-align: center !important;
+}
+
+.info {
+	border-bottom: 1px black solid !important;
+}
+
+table,
+td {
+    border: 1px solid #333;
+}
+
+thead,
+tfoot {
+    background-color: #333;
+    color: #fff;
+}
+
+#myChart {
+	height: 480px !important;
+}
+
+.float-box {
+	float: left !important;
+}
+
+.btn-group {
+	margin-left: 50px;
 }

@@ -1,15 +1,15 @@
 {% from "_formhelpers.html" import render_field %}
 {% extends "base.html" %}
 {% block title %}
-メッセージ画面 - {{ super() }}
+Message screen - {{ super() }}
 {% endblock %}
 {% block content %}
 <script>
     $(function(){
-        // 5秒間隔でget_new_messagesを実行
-        timer = setInterval("get_new_messages()", 5000);
-        // 初期表示で画面の一番下に行く
-        var scroll = (document.scrollingElement || document.body);
+        // Execute 'get_new_messages' every 5 seconds
+        timer: number = setInterval("get_new_messages()", 5000);
+        // Go to the bottom of the screen from the beginning
+        let scroll = (document.scrollingElement || document.body);
         scroll.scrollTop = scroll.scrollHeight;
     });
     user_id = "{{ to_user_id }}";
@@ -19,9 +19,9 @@
             user_id: user_id
         }, function(data){
             $('#message-form').before(data['data']);
-            var checked_message_ids = data['checked_message_ids'];
+            let checked_message_ids = data['checked_message_ids'];
             for(let idx = 0; idx < checked_message_ids.length; idx++){
-                $('#self-message-tag-' + checked_message_ids[idx]).append('<p>既読</p>')
+                $('#self-message-tag-' + checked_message_ids[idx]).append('<p>Read</p>')
             }
         });
     };
@@ -30,30 +30,35 @@
             user_id: user_id,
             offset_value: offset_value
         }, function(data){
-　　　　　　 if(data['data']){
+            let hidden_id;
+            let hidden_tag;
+            if (data['data']) {
                 hidden_id = "load_message_" + offset_value;
                 hidden_tag = '<div id="' + hidden_id + '"></div>'
                 $(hidden_tag).insertAfter('#load_message_button');
                 $(data['data']).insertAfter('#load_message_button');
                 $('body, html').animate({scrollTop: $("#" + hidden_id).offset().top}, 0);
-                offset_value += 1;
+                offset_value: number += 1;
             }
         });
     };
 </script>
 <div class="row">
     <div id="load_message_button" class="col-12">
-        <button class="col-12 btn btn-light btn-outline-primary" onclick="load_old_messages();">100件読み込む</button>
+        <button class="col-12 btn btn-light btn-outline-primary" onclick="load_old_messages();">Read 100 messages</button>
     </div>
+    <!-- reverse：Built-in tag filter -->
     {% for message in messages|reverse %}
         {% if message.from_user_id == current_user.id %}
-        <div id="self-message-tag-{{message.id}}" class="col-lg-1 offset-lg-6 col-md-1 offset-md-2 col-sm-1 offset-sm-1 col-1">
+        <div id="self-message-tag-{{message.id}}" class="message col-lg-1 offset-lg-6 col-md-1 offset-md-2 col-sm-1 offset-sm-1 col-1">
+            <p>{{message.create_at}}</p>
             {% if message.is_checked %}
-            <p>既読</p>
+            <p>Read</p>
             {% endif %}
         </div>
         <div class="speech-bubble-self col-lg-4 col-md-8 col-sm-8 col-9">
             {% for splitted_message in message.message|replace_newline %}
+                <!-- Convert URL to clickable link -->
                 <p>{{splitted_message|urlize}}</p>
             {% endfor %}
         </div>
@@ -75,7 +80,9 @@
                 <p>{{splitted_message|urlize}}</p>
             {% endfor %}
         </div>
-        <div class="col-lg-7 col-md-3 col-sm-1 col-1"></div>
+        <div class="friend-message col-lg-7 col-md-3 col-sm-1 col-1">
+            <p>{{message.create_at}}</p>
+        </div>
         {% endif %}
     {% endfor %}
     <div id="message-form" class="col-lg-4 offset-lg-7 col-md-8 offset-md-4 col-sm-12 col-12">
@@ -87,6 +94,4 @@
         </form>
     </div>
 </div>
-
-
 {% endblock %}

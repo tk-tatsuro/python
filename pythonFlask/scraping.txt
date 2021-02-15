@@ -1,0 +1,1 @@
+{"aws": 4, "bigquery": 0, "cassandra": 0, "dataflow": 0, "docker": 2, "dynamoDB": 0, "elasticsearch": 0, "golang": 0, "hadoop": 1, "hyperdatabase": 0, "kubernetes": 2, "prepflows": 0, "python": 6, "react": 0, "restapi": 0, "serverextracts": 0, "spark": 1, "tableau": 0}

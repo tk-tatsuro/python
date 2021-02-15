@@ -1,0 +1,72 @@
+{% from "_formhelpers.html" import render_field %}
+{% extends "base.html" %}
+{% block title %}
+Job Offers List - {{ super() }}
+{% endblock %}
+{% block content %}
+<div class="mt-4 pb-4">
+    <h1>Job Offers List</h1>
+</div>
+<div clsss="row">
+    <div class="float-box">
+        <form method="GET">
+            {{ form.csrf_token }}
+            {{ render_field(form.tag) }}
+            {{ form.submit() }}
+        </form>
+    </div>
+    {% if job_offers %}
+    <div class="btn-group float-box" role="group">
+        <form method="post" value={{ form.job_offers }}>
+            <button type="submit" btn btn-default dropdown-toggle data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            FILE OUTPUT
+            </button>
+                <ul class="dropdown-menu">
+                    <li><a href="">HTML</a></li>
+                    <li><a href="">SCORE</a></li>
+                </ul>
+        </form>
+    </div>
+    {% endif %}
+    </br>
+    {% if job_offers %}
+    <div class="chart-container">
+        <canvas id="myChart"></canvas>
+    </div>
+    {% endif %}
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js">
+</script>
+<script type="text/javascript">
+    function set_option(job_offers) {
+        let keys = [];
+        let values = [];
+        for (let key in job_offers) {
+            keys.push(key);
+            values.push(job_offers[key]);
+        }
+        let option = {
+            type: 'bar',
+            data: {
+                labels: keys,
+                datasets: [{
+                    label: "SCORE: Total count of skills in offers",
+                    data: values,
+                    backgroundColor: "rgba(0,0,255,0.8)"
+                }]
+            }
+        }
+        return option
+    }
+    let job_offers = JSON.parse({{ job_offers|tojson }})
+    if (job_offers==0) {
+        $('#myChart').before('<div>Sorry. There are no posts..</div>');
+    } else if (job_offers) {
+        console.log(job_offers);
+        let option = set_option(job_offers);
+        let ctx = document.getElementById("myChart").getContext('2d');
+        let myBarChart = new Chart(ctx, option);
+        $('#myChart').before(myBarChart);
+    }
+</script>
+{% endblock %}

@@ -1,6 +1,12 @@
-from flaskr import create_app
+from setuptools import setup
 
-app = create_app()
-
-if __name__ == '__main__':
-    app.run(debug=True)
+setup(
+    name='pythonFlask',
+    version='1.0.0',
+    packages=['flaskr'],
+    url='https://tk-tatsuro-app.com',
+    license='Free',
+    author='tk-tatsuro',
+    author_email='',
+    description='SNS sample package'
+)
