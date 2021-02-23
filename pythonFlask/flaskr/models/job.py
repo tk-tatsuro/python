@@ -74,8 +74,11 @@ class Job:
     @classmethod
     def output_html(cls, skill_count):
         cls.skill_count = str(skill_count)
-        with open('./flaskr/static/output/scraping.txt', 'w') as f:
-            f.write(cls.skill_count)
+        file = open('./flaskr/static/output/scraping.txt', 'w+')
+        file.write(cls.skill_count)
+        file.seek(0)
+        file.read()
+        file.close()
 
     @classmethod
     def get_graph(cls, count_dict):

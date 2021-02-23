@@ -311,7 +311,7 @@ def get_posts():
             "end_post_num": constants.END_POST_NUM,
         }
         try:
-            # ex. https://qiita.com/api/v2/tags/python/items?page=1&per_page=50
+            # ex. https://qiita.com/api/v2/tags/python/items?first_post_num=1&end_post_nume=50
             response = requests.get(f'https://qiita.com/api/v2/tags/{tag}/items', params=params, headers=headers)
         except requests.exceptions.RequestException as e:
             logger.error(f'action=get error={e}')
