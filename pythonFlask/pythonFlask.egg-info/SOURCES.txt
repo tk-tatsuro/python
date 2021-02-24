@@ -1,6 +1,0 @@
-setup.py
-flaskr/__init__.py
-pythonFlask.egg-info/PKG-INFO
-pythonFlask.egg-info/SOURCES.txt
-pythonFlask.egg-info/dependency_links.txt
-pythonFlask.egg-info/top_level.txt
